@@ -20,6 +20,13 @@ class LinkedList:
     def __init__(self):
         self.head = None   # Initially the list is empty, so head is None
 
+    """
+    Append Functions
+    1. insert at tail
+    2. insert at head
+    3. insert at position
+    """
+
     def insert_at_tail(self, data):
         """
         Add a new node containing 'data' at the end of the linked list.
@@ -89,6 +96,86 @@ class LinkedList:
         current.next = new_node
 
 
+    """
+    Pop functions
+    1. delete_at_tail
+    2. delete_at_head
+    3. delete_at_position
+    """
+
+    def delete_at_tail(self):
+        """
+        if the list is empty do nothing
+        traverse to the last node, set prev to current - 1, set prev.next = None to remove the pointer to the last node
+        check for if the list has only one node
+        """
+        # check if list is empty
+        if self.head is None:
+            print("List is empty, No elements to delete")
+            return
+
+        # if the list has only one node
+        if self.head.next == None:
+            self.head = None
+            return
+
+        #Traverse and delete the last node
+        current = self.head
+        prev = None
+        while current.next != None:
+            prev = current
+            current = current.next
+
+        prev.next = None
+
+    def delete_at_head(self):
+        """
+        check if the list is empty do nothing
+        set self.head = self.head.next, and self.head = None
+        check for if the list has only one node
+        """
+
+        # check if the list is empty
+        if self.head is None:
+            print("List is empty, No elements to delete")
+            return
+
+        #check if there is only one node in the list
+        if self.head.next == None:
+            self.head = None
+            return
+        
+        # move head to the next node
+        self.head = self.head.next
+
+    def delete_at_position(self, pos):
+        """
+       
+        """
+        if self.head is None:
+            print("The list is empty")
+            return
+
+        # deleting at head
+        if pos == 0:
+            self.head = self.head.next
+            return
+
+        current = self.head
+        count = 0
+
+        # move to the node just before the target position
+        while current is not None and count < pos - 1:
+            current = current.next
+            count += 1
+
+        # unlink the node at pos
+        current.next = current.next.next
+
+        
+
+
+
     # Display Function
 
     def display(self):
@@ -109,10 +196,20 @@ class LinkedList:
 # ---------------------------------------
 if __name__ == "__main__":
     ll = LinkedList()
-    ll.insert_at_start(1)
-    ll.insert_at_start(2)
-    ll.insert_at_start(3)
+    ll.insert_at_tail(1)
+    ll.insert_at_tail(2)
+    ll.insert_at_tail(3)
+    ll.insert_at_tail(4)
+    ll.insert_at_tail(5)
     ll.insert_at_start(10)
     ll.insert_in_middle(50, 2)
 
-    ll.display()   # Output: 1 -> 2 -> 3 -> None
+    ll.display()
+
+    ll.delete_at_tail()
+    ll.delete_at_head()
+    ll.delete_at_position(3)
+
+
+
+    ll.display()
