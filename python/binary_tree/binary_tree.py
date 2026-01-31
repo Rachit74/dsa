@@ -63,6 +63,27 @@ class BinaryTree:
                 # call the _insert function again recursively if the node is not empty
                 self._insert(node.right, data)
 
+    # Search functions
+    # searching nodes by value
+
+    def search(self, data):
+            self._search_node(self.root, data)
+
+    def _search_node(self, node, data, level=0):
+        if node is None:
+            return
+        # search is basically traversal while checking if the current node meets the searched node
+        if node.data == data:
+            print(f"Node found at level {level}")
+            return
+        
+        level += 1
+        self._search_node(node.left, data, level)
+        self._search_node(node.right, data, level)
+
+
+    # Traversal Functions
+
     def preOrder(self):
         root = self.root
         self._pre_order(node=root)
@@ -135,3 +156,6 @@ tree.inOrder()
 
 print("--- Post Order ---")
 tree.postOrder()
+
+
+tree.search(30)
