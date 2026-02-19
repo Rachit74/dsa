@@ -79,23 +79,53 @@ func (l *LinkedList) InsertAtPosition(val int, pos int) {
 	l.Size++
 }
 
-func (l *LinkedList) Search(val int) {
-	// if list is empty
+func (l *LinkedList) Search(val int) int {
 	if l.Head == nil {
-		fmt.Println("Empty list nothing to search")
-		return
+		fmt.Println("Empty list, nothing to search")
+		return -1
 	}
 
 	current := l.Head
 	for i := 0; i < l.Size; i++ {
 		if current.Value == val {
-			fmt.Println("Traget found at index: ", i)
-			return
+			fmt.Println("Target found at index:", i)
+			return i
 		}
 		current = current.Next
 	}
 
-	fmt.Println("Target not found in the specified list")
+	fmt.Println("Target not found in the list")
+	return -1
+}
+
+func (l *LinkedList) Delete(val int) {
+	if l.Head == nil {
+		fmt.Println("List is empty, nothing to delete")
+		return
+	}
+
+	targetIndex := l.Search(val)
+	if targetIndex == -1 {
+		fmt.Println("Value not found, cannot delete")
+		return
+	}
+
+	if targetIndex == 0 {
+		l.Head = l.Head.Next
+		l.Size--
+		fmt.Println("Deleted value at head")
+		return
+	}
+
+	current := l.Head
+	for i := 0; i < targetIndex-1; i++ {
+		current = current.Next
+	}
+
+	// skip over the target node
+	current.Next = current.Next.Next
+	l.Size--
+	fmt.Println("Deleted value at index:", targetIndex)
 }
 
 // print list
@@ -123,4 +153,6 @@ func main() {
 	list.InsertAtPosition(25, 3)
 	list.print()
 	list.Search(30)
+	list.Delete(30)
+	list.print()
 }
