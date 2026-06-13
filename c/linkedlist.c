@@ -18,7 +18,7 @@ struct LinkedList {
 };
 
 struct Node *createNode(int data) {
-    struct Node *newNode = (struct Node*) malloc(sizeof(struct Node));
+    struct Node *newNode = malloc(sizeof(struct Node));
 
     if (newNode == NULL) {
         return NULL;
@@ -30,7 +30,7 @@ struct Node *createNode(int data) {
 }
 
 struct LinkedList *createList() {
-    struct LinkedList *list = (struct LinkedList*) malloc(sizeof(struct LinkedList));
+    struct LinkedList *list = malloc(sizeof(struct LinkedList));
 
     if (list == NULL) {
         return NULL;
@@ -106,6 +106,7 @@ void insertAtPosition(struct LinkedList *list, struct Node *node, int pos) {
     node->next = current->next;
     current->next = node;
     list->length++;
+    printf("Node Appended\n");
     return;
 }
 
