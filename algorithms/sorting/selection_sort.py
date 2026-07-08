@@ -1,3 +1,4 @@
+# finds the lowest value of the array and moves it to the front
 
 test_cases = [
     [5, 2, 9, 1, 7, 3, 8, 6, 4],
@@ -12,14 +13,17 @@ test_cases = [
     [16, 8, 24, 4, 20, 12, 28, 2]
 ]
 
+def selection_sort(arr):
+    n = len(arr)
+    for i in range(n-1):
+        min_index = i
+        for j in range(i+1, n):
+            if arr[j] < arr[min_index]:
+                min_index = j
+        min_value = arr.pop(min_index)
+        arr.insert(i, min_value)
 
-def bubble_sort(arr):
-    for i in range(len(arr) - 1):
-        for j in range(len(arr) - i - 1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]
-    
     print(arr)
 
 for i in test_cases:
-    bubble_sort(i)
+    selection_sort(i)

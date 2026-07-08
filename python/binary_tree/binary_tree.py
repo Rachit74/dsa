@@ -103,6 +103,13 @@ class BinaryTree:
     3. Then recursively process the right child.
     Recursion implicitly uses the call stack to remember where it left off.
     """
+
+    """
+    in-order
+    1. travel left subtree
+    2. nodes
+    3. then right subtree
+    """
     def _pre_order(self, node):
         if node is None:
             return
@@ -140,6 +147,7 @@ class BinaryTree:
         right_height = self._height(node.right)
 
         return 1 + max (left_height, right_height)
+    
 
 
 tree = BinaryTree()
